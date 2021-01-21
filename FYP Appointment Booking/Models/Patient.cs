@@ -20,7 +20,7 @@ namespace FYP_Appointment_Booking.Models
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
 
-        public List<Appointment> Appointments { get; set; }
+        public List<Appointment>? Appointments { get; set; }
 
 
 
