@@ -1,0 +1,13 @@
+Appointment CRUD operations - https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-5.0&tabs=visual-studio 
+Email Notifications - https://www.c-sharpcorner.com/article/asp-net-mvc5-smtp-email-notification/
+Template - https://www.templateshub.net/download/doccure-doctor-appointment-booking-bootstrap-template-admin-dashboard
+
+
+----Fix Before Final Submission----
+
+Start    with    thisstatement:The    Studentdeclares    that,    except    where    duly    acknowledged,    this    projectis    entirely    his/herown    work.
+CODE    GENERATIONTOOLS
+/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-5.0&tabs=visual-studio.
+THIRD    PARTY COMPONENTS
+ CSS template,    templateshub.net,https://www.templateshub.net/download/doccure-doctor-appointment-booking-bootstrap-template-admin-dashboard,C:\Users\Antóin\Desktop\BIS 4\Web Dev\AppointmentBooking\AppointmentBooking\wwwroot\assets
+MODIFIED    THIRDPARTYFILESIf    youmodifiedfiles,    listthe    component    name,local    file    path    in    your    codebase    to    the    modified    file,    and    briefly    explain    the    modifications.    For    example:Some-­‐Stylesheet-­‐I-­‐Already-­‐Listed-­‐Above.css,    local-­‐file-­‐path-­‐to-­‐the-­‐file-­‐in-­‐my-­‐fyp,Modification:    Ichanged    colourschemein    css    file,    but    kept    the    font    stylings.
