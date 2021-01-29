@@ -27,14 +27,31 @@ namespace FYP_Appointment_Booking
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /* services.AddDbContext<ApplicationDbContext>(options =>
+                 options.UseSqlServer(
+                     Configuration.GetConnectionString("DefaultConnection")));
+             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                 .AddEntityFrameworkStores<ApplicationDbContext>();
+             services.AddControllersWithViews();
+             services.AddRazorPages();*/
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                 options.UseSqlServer(
+                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                 .AddDefaultUI()
+                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                 .AddDefaultTokenProviders();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.Configure<IdentityOptions>(options =>
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("readpolicy",
+                    builder => builder.RequireRole("Admin", "Doctor"));
+                options.AddPolicy("writepolicy",
+                    builder => builder.RequireRole("Admin"));
+            });
+        
+        services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
                 options.Password.RequireDigit = true;

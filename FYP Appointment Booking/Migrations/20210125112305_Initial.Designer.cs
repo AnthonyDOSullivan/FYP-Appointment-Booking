@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FYP_Appointment_Booking.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210121161715_Models")]
-    partial class Models
+    [Migration("20210125112305_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
