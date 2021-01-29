@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace FYP_Appointment_Booking.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "readpolicy")]
     public class AppointmentsController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -13,16 +13,16 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FYP_Appointment_Booking.Controllers
 {
-   
-    
-    
-   // using System.Web.UI;
-   // using System.Web.UI.WebControls;
+
+
+
+    // using System.Web.UI;
+    // using System.Web.UI.WebControls;
 
     /// <summary>  
     /// Email notification controller class.  
     /// </summary>  
-    [Authorize]
+    [Authorize(Policy = "writepolicy")]
     public class EmailNotification : Controller
     {
         #region Index view method.  
