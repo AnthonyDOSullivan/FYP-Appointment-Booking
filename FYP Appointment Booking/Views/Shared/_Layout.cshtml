@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 
 <!-- doccure/  30 Nov 2019 04:11:34 GMT -->
@@ -115,14 +116,22 @@
                                 <li><a href="forgot-password.html">Forgot Password</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a asp-area="" asp-controller="EmailNotification" asp-action="Index">Email</a>
-                        </li>
-                        <li>
-                            <a  asp-area="" asp-controller="Role" asp-action="Index">Role</a>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
 
-                    </ul>
+                    <li>
+                        <a asp-area="" asp-controller="EmailNotification" asp-action="Index">Email</a>
+                    </li>
+                        }
+                        
+                                    @if (User.IsInRole("Admin") || (User.IsInRole("Doctor")))
+                                    {
+
+                    <li>
+                        <a asp-area="" asp-controller="Role" asp-action="Index">Role</a>
+                    </li>}
+
+                                                </ul>
                 </div>
                 <ul class="nav header-navbar-rht">
                     <partial name="_LoginPartial" />
