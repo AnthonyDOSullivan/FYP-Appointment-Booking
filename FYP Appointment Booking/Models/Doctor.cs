@@ -18,7 +18,7 @@ namespace FYP_Appointment_Booking.Models
         public List<Appointment> Appointments { get; set; }
         public List<Patient> Patients { get; set; }
 
-
+        //About to try to have user ID related to Doctors and Patients (commiting in case anything goes wrong)
 
 
 
