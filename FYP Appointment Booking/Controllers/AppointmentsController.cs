@@ -17,13 +17,11 @@ namespace FYP_Appointment_Booking.Controllers
     public class AppointmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
 
-        public AppointmentsController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        public AppointmentsController(ApplicationDbContext context)
         {
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Appointments

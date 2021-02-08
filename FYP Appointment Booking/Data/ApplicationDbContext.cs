@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FYP_Appointment_Booking.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Patient> Patients { get; set; }

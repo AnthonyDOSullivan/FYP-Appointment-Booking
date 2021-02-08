@@ -12,6 +12,7 @@ using FYP_Appointment_Booking.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using FYP_Appointment_Booking.Models;
 
 namespace FYP_Appointment_Booking
 {
@@ -37,7 +38,7 @@ namespace FYP_Appointment_Booking
             services.AddDbContext<ApplicationDbContext>(options =>
                  options.UseSqlServer(
                      Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                  .AddDefaultUI()
                  .AddEntityFrameworkStores<ApplicationDbContext>()
                  .AddDefaultTokenProviders();
@@ -46,7 +47,7 @@ namespace FYP_Appointment_Booking
 
             services.AddAuthorization(options => {
                 options.AddPolicy("readpolicy",
-                    builder => builder.RequireRole("Admin", "Doctor"));
+                    builder => builder.RequireRole("Admin", "Doctor", "Patient"));
                 options.AddPolicy("writepolicy",
                     builder => builder.RequireRole("Admin"));
             });
