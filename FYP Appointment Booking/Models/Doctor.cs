@@ -20,12 +20,9 @@ namespace FYP_Appointment_Booking.Models
         public List<Patient> Patients { get; set; }
 
 
-
-
         //About to try to have user ID related to Doctors and Patients (commiting in case anything goes wrong)
 
-        public string UserId { get; set; }
-        public IdentityUser User { get; set; }
+        public ApplicationUser User { get; set; }
 
     }
 }

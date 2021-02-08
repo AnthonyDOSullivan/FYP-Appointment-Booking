@@ -25,7 +25,8 @@ namespace FYP_Appointment_Booking.Models
 
         //About to try to have user ID related to Doctors and Patients (commiting in case anything goes wrong)
 
-        
+        public ApplicationUser User { get; set; }
+
 
     }
 }
