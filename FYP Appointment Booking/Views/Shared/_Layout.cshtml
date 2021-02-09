@@ -116,22 +116,31 @@
                                 <li><a href="forgot-password.html">Forgot Password</a></li>
                             </ul>
                         </li>
-                        @if (User.IsInRole("Admin"))
-                        {
+                        <!-- if (User.IsInRole("Admin"))
+    {
+        //-->
+                        <li>
 
-                    <li>
                         <a asp-area="" asp-controller="EmailNotification" asp-action="Index">Email</a>
-                    </li>
-                        }
-                        
-                                    @if (User.IsInRole("Admin") || (User.IsInRole("Doctor")))
-                                    {
 
-                    <li>
-                        <a asp-area="" asp-controller="Role" asp-action="Index">Role</a>
-                    </li>}
+                        </li>
+                        <!-- }
 
-                                                </ul>
+    if (User.IsInRole("Admin") || (User.IsInRole("Doctor")))
+    { //-->
+
+                        <li>
+                            <a asp-area="" asp-controller="Role" asp-action="Index">Role</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Doctors" asp-action="Index">Doctors</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Patients" asp-action="Index">Patients</a>
+                        </li>
+                        <!-- }-->
+
+                    </ul>
                 </div>
                 <ul class="nav header-navbar-rht">
                     <partial name="_LoginPartial" />

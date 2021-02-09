@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace FYP_Appointment_Booking.Controllers
 {
-    [Authorize(Policy = "readpolicy")]
+    //[Authorize(Policy = "readpolicy")]
     public class AppointmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -62,7 +62,7 @@ namespace FYP_Appointment_Booking.Controllers
         }
 
         // GET: Appointments/Create
-        [Authorize]
+       // [Authorize]
         public IActionResult Create()
         {
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId");

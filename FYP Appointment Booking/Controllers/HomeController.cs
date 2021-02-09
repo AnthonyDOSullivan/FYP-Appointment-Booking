@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace FYP_Appointment_Booking.Controllers
 {
 
-    [Authorize(Policy = "readpolicy")]
+    //[Authorize(Policy = "readpolicy")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
