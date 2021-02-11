@@ -19,7 +19,7 @@ namespace FYP_Appointment_Booking.Data
 
 
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+       public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
@@ -27,7 +27,7 @@ namespace FYP_Appointment_Booking.Data
 
         //dbest tables here 
 
-        protected override void OnModelCreating(ModelBuilder builder)
+      /*  protected override void OnModelCreating(ModelBuilder builder)
         {
 
             string ADMIN_ID = "02174cf0– 9412 – 4cfe- afbf- 59f706d72cf6";
@@ -65,7 +65,7 @@ namespace FYP_Appointment_Booking.Data
                 RoleId = ROLE_ID,
                 UserId = ADMIN_ID
             });
-        }
+        }*/
     }
 }
 
