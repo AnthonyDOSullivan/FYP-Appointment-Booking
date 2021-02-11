@@ -13,6 +13,7 @@ namespace FYP_Appointment_Booking.Models
         [PersonalData]
         public DateTime DOB { get; set; }
 
+
         public int? DoctorId { get; set; }
         public Doctor? Doctor { get; set; }
         public int? PatientId { get; set; }
