@@ -67,12 +67,13 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
             public string Name { get; set; }
 
-           /* public int? DoctorId { get; set; }
-            public Doctor? Doctor { get; set; }
+            /* public int? DoctorId { get; set; }
+             public Doctor? Doctor { get; set; }
+                        */
             public int? PatientId { get; set; }
 
             public Patient? Patient { get; set; }
-           */
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -89,7 +90,7 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PatientId = Input.PatientId, Name = Input.Name };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
