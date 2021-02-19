@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FYP_Appointment_Booking.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210208151931_Second")]
-    partial class Second
+    [Migration("20210219154100_AppNoEmail")]
+    partial class AppNoEmail
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -124,9 +124,6 @@ namespace FYP_Appointment_Booking.Migrations
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");

@@ -123,9 +123,6 @@ namespace FYP_Appointment_Booking.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 

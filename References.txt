@@ -1,13 +1,16 @@
 Appointment CRUD operations - https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-5.0&tabs=visual-studio 
+Role Authorization - https://www.c-sharpcorner.com/article/adding-role-authorization-to-a-asp-net-mvc-core-application/
 Email Notifications - https://www.c-sharpcorner.com/article/asp-net-mvc5-smtp-email-notification/
 Template - https://www.templateshub.net/download/doccure-doctor-appointment-booking-bootstrap-template-admin-dashboard
 
 
-----Fix Before Final Submission----
+The    Studentdeclares    that,    except    where    duly    acknowledged,    this    projectis    entirely    his/herown    work.
 
-Start    with    thisstatement:The    Studentdeclares    that,    except    where    duly    acknowledged,    this    projectis    entirely    his/herown    work.
-CODE    GENERATIONTOOLS
-/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-5.0&tabs=visual-studio.
-THIRD    PARTY COMPONENTS
- CSS template,    templateshub.net,https://www.templateshub.net/download/doccure-doctor-appointment-booking-bootstrap-template-admin-dashboard,C:\Users\Antóin\Desktop\BIS 4\Web Dev\AppointmentBooking\AppointmentBooking\wwwroot\assets
-MODIFIED    THIRDPARTYFILESIf    youmodifiedfiles,    listthe    component    name,local    file    path    in    your    codebase    to    the    modified    file,    and    briefly    explain    the    modifications.    For    example:Some-­‐Stylesheet-­‐I-­‐Already-­‐Listed-­‐Above.css,    local-­‐file-­‐path-­‐to-­‐the-­‐file-­‐in-­‐my-­‐fyp,Modification:    Ichanged    colourschemein    css    file,    but    kept    the    font    stylings.
+CODE    GENERATIONTOOLS If    yourdevelopment    environment    actively    generated    code    for    you, ASP.NET MVC Scaffolding used for Model CRUD operations and Identity pages.
+
+THIRD    PARTYCOMPONENTSThis    is    a    list    of    allthird-­‐partycomponentused(libraries,    subsystems,templates,    stylesheets,    etc.)that    you    used.
+Role Manager ,    C-SharpCorner.com ,https://www.c-sharpcorner.com/article/adding-role-authorization-to-a-asp-net-mvc-core-application/ - All contents are copyright of their authors. (Munibb Butt),Open Source , Used in multiple files, demonstrated at https://localhost:44350/Roles.  
+Email Notification Sender,  https://www.c-sharpcorner.com/article/asp-net-mvc5-smtp-email-notification/ - All contents are copyright of their authors. (Asma Khalid ),Open Source , Used in multiple files, demonstrated at https://localhost:44350/Email.
+
+MODIFIED  THIRDPARTYFILES If    youmodifiedfiles,    listthe    component    name,local    file    path    in    your    codebase    to    the    modified    file,    and    briefly    explain    the    modifications.    
+Doccure emplate (https://www.templateshub.net/download/doccure-doctor-appointment-booking-bootstrap-template-admin-dashboard),   C:\Users\Antóin\Desktop\BIS 4\FYP (Upload files to Drive)\FYP Appointment Booking\FYP Appointment Booking\wwwroot\assets\css\bootstrap.min.css, Modification:    I changed the navbar to fit the operations I was looking to include in my application, color schemes etc have remainded .

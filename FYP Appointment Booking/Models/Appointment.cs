@@ -19,7 +19,6 @@ namespace FYP_Appointment_Booking.Models
         public string Location { get; set; }
         public string Details { get; set; }
         public bool Confirmed { get; set; }
-        public string Email { get; set; }
 
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }

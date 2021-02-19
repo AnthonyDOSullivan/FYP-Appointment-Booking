@@ -2,7 +2,7 @@
 
 namespace FYP_Appointment_Booking.Migrations
 {
-    public partial class Second : Migration
+    public partial class AppNoEmail : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

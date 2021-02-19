@@ -18,7 +18,6 @@ namespace FYP_Appointment_Booking.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-
         public AppointmentsController(ApplicationDbContext context)
         {
             _context = context;
@@ -29,7 +28,7 @@ namespace FYP_Appointment_Booking.Controllers
         {
             //Review this code post meeting w/ Andrea 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
-            var Usr = await  _context.Users.Where(u => u.Id == userId).FirstAsync();
+            var Usr = await _context.Users.Where(u => u.Id == userId).FirstAsync();
             var applicationDbContext = _context.Appointments.Where(a => a.PatientId == Usr.PatientId).Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -51,6 +50,7 @@ namespace FYP_Appointment_Booking.Controllers
             {
                 return NotFound();
             }
+
             //This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
 
@@ -61,14 +61,12 @@ namespace FYP_Appointment_Booking.Controllers
             }
             return View(appointment);
         }
-
         // GET: Appointments/Create
-       // [Authorize]
         public IActionResult Create()
         {
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId");
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id");
             return View();
         }
 
@@ -77,10 +75,8 @@ namespace FYP_Appointment_Booking.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,Location,Details,Confirmed,Email,DoctorId,PatientId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("Id,Date,Location,Details,Confirmed,DoctorId,PatientId,UserId")] Appointment appointment)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
-            appointment.UserId = userId;
             if (ModelState.IsValid)
             {
                 _context.Add(appointment);
@@ -89,7 +85,7 @@ namespace FYP_Appointment_Booking.Controllers
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
         }
 
@@ -108,16 +104,19 @@ namespace FYP_Appointment_Booking.Controllers
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", appointment.UserId);
-            //This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
+            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
+            return View(appointment);
 
-            if (appointment.UserId != userId)
+            //This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
+            // var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
+            //Remove the return line when adding the var UserId line
+
+          /*  if (appointment.UserId != userId)
             {
                 return View("PrivacyError");
 
             }
-            return View(appointment);
+            return View(appointment);  - Or is this what is messing it up ?*/
         }
 
         // POST: Appointments/Edit/5
@@ -125,7 +124,7 @@ namespace FYP_Appointment_Booking.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Location,Details,Confirmed,Email,DoctorId,PatientId,UserId")] Appointment appointment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Location,Details,Confirmed,DoctorId,PatientId,UserId")] Appointment appointment)
         {
             if (id != appointment.Id)
             {
@@ -154,7 +153,7 @@ namespace FYP_Appointment_Booking.Controllers
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
         }
 
@@ -176,16 +175,14 @@ namespace FYP_Appointment_Booking.Controllers
             {
                 return NotFound();
             }
-
-            //This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
+            /*This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
 
             if (appointment.UserId != userId)
             {
                 return View("PrivacyError");
 
-            }
-
+            } Again is this what is messing it up? Replace with Patient ID*/
 
             return View(appointment);
         }
@@ -193,7 +190,6 @@ namespace FYP_Appointment_Booking.Controllers
         // POST: Appointments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var appointment = await _context.Appointments.FindAsync(id);
