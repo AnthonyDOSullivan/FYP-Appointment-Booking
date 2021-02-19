@@ -60,37 +60,47 @@
 
                             <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (User.IsInRole("Admin") || (User.IsInRole("Doctor")) || (User.IsInRole("Patient")))
+                        @if (User.IsInRole("Patient") || (User.IsInRole("Doctor")))
                         {
 
-                    <li>
-                        <a asp-area="" asp-controller="Appointments" asp-action="Index">Appointments</a>
+                            <li>
+                                <a asp-area="" asp-controller="Appointments" asp-action="Index">Appointments</a>
 
-                    </li>
+                            </li>
                         }
                         @if (User.IsInRole("Admin"))
                         {
-                            //-->
-                    <li>
 
-                        <a asp-area="" asp-controller="EmailNotification" asp-action="Index">Email</a>
+                            <li>
+                                <a asp-area="" asp-controller="AdminAppointments" asp-action="Index">Appointments</a>
 
-                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="Role" asp-action="Index">Role</a>
-                                    </li>}
+                            </li>
+                        }
+                            @if (User.IsInRole("Admin"))
+                            {
+                                //-->
+                                <li>
 
-                        @if (User.IsInRole("Admin") || (User.IsInRole("Doctor")))
-                        {<!--Use class has submenu when sending off for final submission to allow access to the different functions-->
+                                    <a asp-area="" asp-controller="EmailNotification" asp-action="Index">Email</a>
 
-                                            <li>
-                                                <a asp-area="" asp-controller="Doctors" asp-action="Index">Doctors</a>
-                                            </li>
-                                                            <li>
-                                                                <a asp-area="" asp-controller="Patients" asp-action="Index">Patients</a>
-                                                            </li>}
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Role" asp-action="Index">Role</a>
+                                </li>
+}
 
-                    </ul>
+                            @if (User.IsInRole("Admin") || (User.IsInRole("Doctor")))
+                            {<!--Use class has submenu when sending off for final submission to allow access to the different functions-->
+
+                                <li>
+                                    <a asp-area="" asp-controller="Doctors" asp-action="Index">Doctors</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Patients" asp-action="Index">Patients</a>
+                                </li>
+}
+
+                        </ul>
                 </div>
                 <ul class="nav header-navbar-rht">
                     <partial name="_LoginPartial" />

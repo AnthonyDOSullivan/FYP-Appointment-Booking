@@ -7,39 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FYP_Appointment_Booking.Data;
 using FYP_Appointment_Booking.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
-using FYP_Appointment_Booking.Areas.Identity.Pages.Account;
 
 namespace FYP_Appointment_Booking.Controllers
 {
-    //[Authorize(Policy = "readpolicy")]
-    public class AppointmentsController : Controller
+    public class AdminAppointmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AppointmentsController(ApplicationDbContext context)
+        public AdminAppointmentsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Appointments
+        // GET: AdminAppointments
         public async Task<IActionResult> Index()
         {
-            //Review this code post meeting w/ Andrea 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
-            var Usr = await _context.Users.Where(u => u.Id == userId).FirstAsync();
-            var applicationDbContext = _context.Appointments.Where(a => a.PatientId == Usr.PatientId).Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
+            var applicationDbContext = _context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
             return View(await applicationDbContext.ToListAsync());
-
-            if (User.IsInRole("Admin"))
-            {
-                return View(await _context.Appointments.ToListAsync());
-            }
         }
 
-        // GET: Appointments/Details/5
+        // GET: AdminAppointments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -57,17 +44,10 @@ namespace FYP_Appointment_Booking.Controllers
                 return NotFound();
             }
 
-            //This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
-
-            if (appointment.UserId != userId)
-            {
-                return View("PrivacyError");
-
-            }
             return View(appointment);
         }
-        // GET: Appointments/Create
+
+        // GET: AdminAppointments/Create
         public IActionResult Create()
         {
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId");
@@ -76,7 +56,7 @@ namespace FYP_Appointment_Booking.Controllers
             return View();
         }
 
-        // POST: Appointments/Create
+        // POST: AdminAppointments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -95,7 +75,7 @@ namespace FYP_Appointment_Booking.Controllers
             return View(appointment);
         }
 
-        // GET: Appointments/Edit/5
+        // GET: AdminAppointments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -112,20 +92,9 @@ namespace FYP_Appointment_Booking.Controllers
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
             ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
-
-            //This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
-            // var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
-            //Remove the return line when adding the var UserId line
-
-          /*  if (appointment.UserId != userId)
-            {
-                return View("PrivacyError");
-
-            }
-            return View(appointment);  - Or is this what is messing it up ?*/
         }
 
-        // POST: Appointments/Edit/5
+        // POST: AdminAppointments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -163,8 +132,7 @@ namespace FYP_Appointment_Booking.Controllers
             return View(appointment);
         }
 
-        // GET: Appointments/Delete/5
-        [Authorize]
+        // GET: AdminAppointments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -181,19 +149,11 @@ namespace FYP_Appointment_Booking.Controllers
             {
                 return NotFound();
             }
-            /*This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
-
-            if (appointment.UserId != userId)
-            {
-                return View("PrivacyError");
-
-            } Again is this what is messing it up? Replace with Patient ID*/
 
             return View(appointment);
         }
 
-        // POST: Appointments/Delete/5
+        // POST: AdminAppointments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
