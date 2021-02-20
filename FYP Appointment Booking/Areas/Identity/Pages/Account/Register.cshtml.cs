@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using FYP_Appointment_Booking.Models; 
+
 
 namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
 {
@@ -67,9 +67,9 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
             public string Name { get; set; }
 
-            /* public int? DoctorId { get; set; }
-             public Doctor? Doctor { get; set; }
-                        */
+            public int? DoctorId { get; set; }
+            public Doctor? Doctor { get; set; }
+                        
             public int? PatientId { get; set; }
 
             public Patient? Patient { get; set; }
