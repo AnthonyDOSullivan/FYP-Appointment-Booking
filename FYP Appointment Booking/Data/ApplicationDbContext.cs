@@ -15,7 +15,7 @@ namespace FYP_Appointment_Booking.Data
 
         public DbSet<Doctor> Doctors { get; set; }
 
-        public DbSet<ApplicationUser> ApllicationUsers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
 
 

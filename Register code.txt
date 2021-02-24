@@ -1,0 +1,27 @@
+ /* if (_context.Users.Where(u => u.PatientId == Input.PatientId).Any())
+                {
+                    ModelState.AddModelError("Caution", "Patient ID is already registered");
+                }
+           
+               else  */
+
+ document.getElementById('Role').onchange = function () {
+                    if (this.value = 'Patient') {
+                        document.getElementById("DocId").disabled = true;
+                        document.getElementById("DocId").style.display = "none";
+                        
+                    }
+
+                    else if (this.value = 'Doctor') {
+                        document.getElementById("PatId").disabled = true;
+                        document.getElementById("PatId").style.display = "none";
+                       
+                    }
+                    else {
+                        document.getElementById("PatId").disabled = true;
+                        document.getElementById("PatId").style.display = "none";
+                        document.getElementById("DocId").disabled = true;
+                        document.getElementById("DocId").style.display = "none";
+
+                    }
+                }

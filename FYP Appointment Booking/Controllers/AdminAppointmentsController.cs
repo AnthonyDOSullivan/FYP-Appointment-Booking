@@ -52,7 +52,7 @@ namespace FYP_Appointment_Booking.Controllers
         {
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId");
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
         }
 
@@ -71,7 +71,7 @@ namespace FYP_Appointment_Booking.Controllers
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
         }
 
@@ -90,7 +90,7 @@ namespace FYP_Appointment_Booking.Controllers
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
         }
 
@@ -128,7 +128,7 @@ namespace FYP_Appointment_Booking.Controllers
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using FYP_Appointment_Booking.Data;
 using FYP_Appointment_Booking.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +27,8 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+
+       
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -82,6 +85,19 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
+        public class PatIdCheck : ValidationAttribute
+        {
+            private readonly ApplicationDbContext _context;
+
+            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            {
+
+                if (_context.ApplicationUsers.Where(p => p.PatientId == Patient.Id){
+
+                }
+
+            }
+        }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
@@ -121,7 +137,14 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
-                }
+                
+               }
+            
+            }
+            else
+            {
+                return Content("Invalid data");
+
             }
 
             ViewData["roles"] = _roleManager.Roles.ToList();

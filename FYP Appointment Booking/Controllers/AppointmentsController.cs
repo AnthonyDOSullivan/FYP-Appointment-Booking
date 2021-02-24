@@ -33,10 +33,7 @@ namespace FYP_Appointment_Booking.Controllers
             var applicationDbContext = _context.Appointments.Where(a => a.PatientId == Usr.PatientId).Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
             return View(await applicationDbContext.ToListAsync());
 
-            if (User.IsInRole("Admin"))
-            {
-                return View(await _context.Appointments.ToListAsync());
-            }
+
         }
 
         // GET: Appointments/Details/5
@@ -72,7 +69,7 @@ namespace FYP_Appointment_Booking.Controllers
         {
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId");
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
         }
 
@@ -91,7 +88,7 @@ namespace FYP_Appointment_Booking.Controllers
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
         }
 
@@ -110,7 +107,7 @@ namespace FYP_Appointment_Booking.Controllers
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
 
             //This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
@@ -159,7 +156,7 @@ namespace FYP_Appointment_Booking.Controllers
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.ApllicationUsers, "Id", "Id", appointment.UserId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
         }
 

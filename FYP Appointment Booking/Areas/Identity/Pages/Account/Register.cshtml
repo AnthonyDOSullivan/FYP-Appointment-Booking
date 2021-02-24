@@ -28,32 +28,52 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div id="Role" class="form-group">
                 <label asp-for="Input.Name"></label>
-                <select asp-for="Input.Name" class="form-control" asp-items='new SelectList(roles,"Id","Name")'>
+                <select  asp-for="Input.Name" class="form-control" asp-items='new SelectList(roles,"Id","Name")'>
                 </select>
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
 
-            <!--<div class="form-group">
-        <label asp-for="Input.DoctorId"></label>
-        <input asp-for="Input.DoctorId" class="form-control" />
-        <span asp-validation-for="Input.DoctorId" class="text-danger"></span>
+            <script>
+               
+                document.getElementById('Role').onselectionchange = function () {
 
-    </div>-->
-            <div class="form-group">
-                <label asp-for="Input.PatientId"></label>
-                <input asp-for="Input.PatientId" class="form-control" />
-                <span asp-validation-for="Input.PatientId" class="text-danger"></span>
+                    if (Role.value = 'Patient') {
+                        document.getElementById("DocId").disabled = true;
+                        document.getElementById("DocId").style.display = "none";
 
-            </div>
+                    }
 
-            <div class="form-group">
-                <label asp-for="Input.DoctorId"></label>
-                <input asp-for="Input.DoctorId" class="form-control" />
-                <span asp-validation-for="Input.DoctorId" class="text-danger"></span>
+                    else if (Role.value = 'Doctor') {
+                        document.getElementById("PatId").disabled = true;
+                        document.getElementById("PatId").style.display = "none";
 
-            </div>
+                    }
+                    else if (Role.value = 'Admin') {
+                        document.getElementById("PatId").disabled = true;
+                        document.getElementById("PatId").style.display = "none";
+                        document.getElementById("DocId").disabled = true;
+                        document.getElementById("DocId").style.display = "none";
+
+                    }
+                }
+               
+            </script>
+                <div  id="PatId" class="form-group">
+                    <label asp-for="Input.PatientId"></label>
+                    <input id="PatId" asp-for="Input.PatientId" class="form-control" />
+                    <span asp-validation-for="Input.PatientId" class="text-danger"></span>
+
+                </div>
+            
+                    <div id="DocId" class="form-group">
+                        <label asp-for="Input.DoctorId"></label>
+                        <input id="PatId" asp-for="Input.DoctorId" class="form-control" />
+                        <span asp-validation-for="Input.DoctorId" class="text-danger"></span>
+
+                    </div>
+            
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
