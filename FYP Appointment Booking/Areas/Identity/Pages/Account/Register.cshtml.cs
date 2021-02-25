@@ -28,7 +28,7 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-       
+
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -69,10 +69,10 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             public string Name { get; set; }
-
+            
             public int? DoctorId { get; set; }
             public Doctor? Doctor { get; set; }
-                        
+
             public int? PatientId { get; set; }
 
             public Patient? Patient { get; set; }
@@ -85,20 +85,28 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-        public class PatIdCheck : ValidationAttribute
+       /*  public class PatIdCheck : ValidationAttribute
+         {
+             private readonly ApplicationDbContext _context;
+        //hide id field based on role 
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            private readonly ApplicationDbContext _context;
+            String name = (String)value;
 
-            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            if (name == "Patient")
             {
-
-                if (_context.ApplicationUsers.Where(p => p.PatientId == Patient.Id){
-
+                yield return //hide doctor div 
                 }
+            //loop to show there is no corresponding patient ID and 
+            if (_context.ApplicationUsers.Where(p => p.PatientId != Patient.Id)
+                    {
+                //return error page
 
             }
-        }
 
+        }
+    }*/
+      
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
