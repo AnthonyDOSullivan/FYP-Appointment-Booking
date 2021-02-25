@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FYP_Appointment_Booking.Models
 {
@@ -20,13 +21,15 @@ namespace FYP_Appointment_Booking.Models
         public string Details { get; set; }
         public bool Confirmed { get; set; }
 
-        public int DoctorId { get; set; }
-        public Doctor Doctor { get; set; }
+        public int? DoctorId { get; set; }
+        public Doctor? Doctor { get; set; }
         public int? PatientId { get; set; }
 
         public Patient? Patient { get; set; }
 
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public string? UserId { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public ApplicationUser? User { get; set; }
     }
 }

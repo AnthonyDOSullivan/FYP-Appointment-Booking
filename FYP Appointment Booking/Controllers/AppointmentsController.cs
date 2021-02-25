@@ -55,13 +55,13 @@ namespace FYP_Appointment_Booking.Controllers
             }
 
             //This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
+           // var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
 
-            if (appointment.UserId != userId)
-            {
-                return View("PrivacyError");
+           // if (appointment.UserId != userId)
+           // {
+            //    return View("PrivacyError");
 
-            }
+            //}
             return View(appointment);
         }
         // GET: Appointments/Create
