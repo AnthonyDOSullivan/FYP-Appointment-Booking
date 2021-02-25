@@ -17,9 +17,12 @@ namespace FYP_Appointment_Booking.Data
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
+        public DbSet<Feedback> Feedback { get; set; }
 
 
-       public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
