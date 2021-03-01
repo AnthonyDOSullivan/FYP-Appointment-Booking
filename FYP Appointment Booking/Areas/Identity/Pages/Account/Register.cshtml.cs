@@ -27,6 +27,7 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _context;
 
 
 
@@ -35,13 +36,15 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -79,34 +82,14 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
 
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null, string validationMsg = null)
         {
             ViewData["roles"] = _roleManager.Roles.ToList();
+            ViewData["msg"] = validationMsg;
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-       /*  public class PatIdCheck : ValidationAttribute
-         {
-             private readonly ApplicationDbContext _context;
-        //hide id field based on role 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            String name = (String)value;
 
-            if (name == "Patient")
-            {
-                yield return //hide doctor div 
-                }
-            //loop to show there is no corresponding patient ID and 
-            if (_context.ApplicationUsers.Where(p => p.PatientId != Patient.Id)
-                    {
-                //return error page
-
-            }
-
-        }
-    }*/
-      
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -114,6 +97,28 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                if (Input.PatientId != null && Input.DoctorId != null)
+                {
+                    return RedirectToPage("Register", new { validationMsg = "No patient and doctor" });
+                }
+                if (!_context.Patients.Any(p => p.Id == Input.PatientId))
+                {
+                    Patient patient = new Patient
+                    {
+                        Email = Input.Email,
+                        DoctorId = 1,
+
+                    };
+                    _context.Add(patient);
+                    await _context.SaveChangesAsync();
+                    string valmsg = "The patient id " + Input.PatientId + " does not exist in our database. We created a new patient Id for you: " + patient.Id + ", please use this in the registration";
+                    return RedirectToPage("Register", new { validationMsg = valmsg });
+                }
+                if (_context.Users.Any(u => u.PatientId == Input.PatientId))
+                {
+                    string valmsg = "The patient id " + Input.PatientId + " is already linked to a user profile";
+                    return RedirectToPage("Register", new { validationMsg = valmsg });
+                }
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PatientId = Input.PatientId, Name = Input.Name, DoctorId=Input.DoctorId };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
