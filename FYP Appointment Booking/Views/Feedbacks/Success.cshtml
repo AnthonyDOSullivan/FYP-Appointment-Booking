@@ -3,7 +3,7 @@
 @model FYP_Appointment_Booking.Models.Feedback
 
 @{
-    ViewData["Title"] = "Email Success";
+    ViewData["Title"] = "Feedback Success";
 }
 
 <!-- Page Content -->
@@ -19,6 +19,7 @@
                         <div class="success-cont">
                             <i class="fas fa-check"></i>
                             <h3>Feedback Submitted Successfully!</h3>
+                            <p>Your feedback on our application is appreciated and we will look to action it as soon as possible!</p>
                             <!-- <p asp-controller="EmailNotification" asp-action="Index" data-ajax="true" data-ajax-method="POST">  Appointment booked with <strong>Dr. Darren Elder</strong><br> on <strong>12 Nov 2019 5:00PM to 6:00PM</strong></p>-->
                             <a asp-area="" asp-controller="Home" asp-action="Index">
                                 Return to Home Page
