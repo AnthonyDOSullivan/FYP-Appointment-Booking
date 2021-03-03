@@ -1,17 +1,27 @@
 ﻿   <head>
-       <style>
-           div.col{
-               padding-bottom : 75px;
-           }
-       </style>
-   </head>
+    <style>
+        div.col {
+            padding-bottom: 75px;
+        }
+    </style>
+    <script>
+        function printImg(url) {
+            var win = window.open('');
+            win.document.write('<img src="' + url + '" onload="window.print();window.close()" />');
+            win.focus();
+        }
+       
+    </script>
+    
+</head>
     <body>
 
         <div class="container" id="QR">
             <div class="row align-items-start">
                 <div class="col">
                     <p>Appointment QR Code</p>
-                    <img src="assets/img/qrcode_localhost.png" width="300" height="200" >
+                    <img src="assets/img/qrcode_localhost.png" width="300" height="200">
+
                 </div>
                 
                     <div class="col">
@@ -21,6 +31,17 @@
 
                 
 
+            </div>
+            <div class="row align-items-end">
+                <div class="col">
+                    <button onclick="printImg('assets/img/qrcode_localhost.png')">Print</button>
+
+
+                </div>
+                <div class="col">
+                    <button onclick="printImg('assets/img/qrcode_Feedback.png')">Print</button>
+
+                </div>
             </div>
         </div>
     </body>
