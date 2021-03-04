@@ -20,10 +20,26 @@ namespace FYP_Appointment_Booking.Controllers
         }
 
         // GET: AdminAppointments
-        public async Task<IActionResult> Index()
+        /* public async Task<IActionResult> Index()
+         {
+             var applicationDbContext = _context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
+             return View(await applicationDbContext.ToListAsync());
+         }
+        */
+        //https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/search?view=aspnetcore-5.0
+        public async Task<IActionResult> Index(string searchString)
         {
             var applicationDbContext = _context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
             return View(await applicationDbContext.ToListAsync());
+            var appointments = from a in _context.Appointments
+                         select a;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                appointments = appointments.Where(a => a.Location.Contains(searchString));
+            }
+
+            return View(await appointments.ToListAsync());
         }
 
         // GET: AdminAppointments/Details/5
