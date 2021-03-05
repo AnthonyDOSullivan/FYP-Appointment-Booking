@@ -25,13 +25,25 @@ namespace FYP_Appointment_Booking.Controllers
         }
 
         // GET: Appointments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             //Review this code post meeting w/ Andrea 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
             var Usr = await _context.Users.Where(u => u.Id == userId).FirstAsync();
             var applicationDbContext = _context.Appointments.Where(a => a.PatientId == Usr.PatientId).Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
-            return View(await applicationDbContext.ToListAsync());
+
+            //https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/search?view=aspnetcore-5.0
+
+
+            var appointments = from a in _context.Appointments.Where(a => a.PatientId == Usr.PatientId)
+                               select a;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+
+                appointments = appointments.Where(a => a.Location.Contains(searchString));
+            }
+            return View(await appointments.ToListAsync());
 
 
         }
