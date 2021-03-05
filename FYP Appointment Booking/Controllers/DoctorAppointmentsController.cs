@@ -28,20 +28,21 @@ namespace FYP_Appointment_Booking.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //UserId of currently logged in user
             var Usr = await _context.Users.Where(u => u.Id == userId).FirstAsync();
             var applicationDbContext = _context.Appointments.Where(a => a.DoctorId == Usr.DoctorId).Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
-           // return View(await applicationDbContext.ToListAsync());
+            // return View(await applicationDbContext.ToListAsync());
             //https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/search?view=aspnetcore-5.0
-           
-                return View(await applicationDbContext.ToListAsync());
-                var appointments = from a in _context.Appointments
+
+
+            var appointments = from a in _context.Appointments.Where(a => a.DoctorId == Usr.DoctorId)
                                    select a;
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    appointments = appointments.Where(a => a.Location.Contains(searchString));
-                }
-
-                return View(await appointments.ToListAsync());
+              
+                appointments = appointments.Where(a => a.Location.Contains(searchString)).Where(a => a.DoctorId == Usr.DoctorId).Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
             }
+
+            return View(await applicationDbContext.ToListAsync());
+        }
         
 
         

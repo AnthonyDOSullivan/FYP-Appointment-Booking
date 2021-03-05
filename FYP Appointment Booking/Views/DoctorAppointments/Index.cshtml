@@ -5,7 +5,16 @@
 }
 
 <h1>Appointments</h1>
+<div class="search-box">
+    <form asp-controller="DoctorAppointments" asp-action="Index">
+        <div class="form-group search-location">
+            <input type="text" name="SearchString" placeholder="Search Location">
+            <span class="form-text">Filter Based on location</span>
+        </div>
+        <button type="submit" class="btn btn-primary search-btn" value="Filter"><i class="fas fa-search"></i> <span>Search</span></button>
 
+    </form>
+</div>
 
 <table class="table">
     <thead>
