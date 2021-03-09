@@ -117,9 +117,6 @@ namespace FYP_Appointment_Booking.Controllers
             {
                 return NotFound();
             }
-            ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
-            ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
             return View(appointment);
 
             //This will need to be fixed so that admin staff can load appointments for users with different IDs to theirs 

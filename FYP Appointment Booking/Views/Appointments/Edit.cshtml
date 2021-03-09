@@ -13,6 +13,9 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="PatientId" />
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="DoctorId" />
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
                 <input asp-for="Date" class="form-control" />
@@ -33,9 +36,10 @@
                     <input class="form-check-input" asp-for="Confirmed" /> @Html.DisplayNameFor(model => model.Confirmed)
                 </label>
             </div>
-           
-           
-           
+
+
+
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

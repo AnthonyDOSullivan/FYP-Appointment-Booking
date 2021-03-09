@@ -21,10 +21,16 @@ namespace FYP_Appointment_Booking.Models
         public string Details { get; set; }
         public bool Confirmed { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public int? DoctorId { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
         public Doctor? Doctor { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
         public int? PatientId { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public Patient? Patient { get; set; }
 
         [HiddenInput(DisplayValue = false)]

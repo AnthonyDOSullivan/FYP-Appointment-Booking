@@ -130,7 +130,7 @@ namespace FYP_Appointment_Booking.Migrations
 
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
-
+                    
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
