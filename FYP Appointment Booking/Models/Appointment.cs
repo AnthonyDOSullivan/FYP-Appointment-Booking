@@ -21,6 +21,8 @@ namespace FYP_Appointment_Booking.Models
         public TimeSpan Time { get; set; }
 
 
+
+
         public string Location { get; set; }
         public string Details { get; set; }
         public bool Confirmed { get; set; }

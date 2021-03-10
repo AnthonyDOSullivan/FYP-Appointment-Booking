@@ -7,6 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FYP_Appointment_Booking.Data;
 using FYP_Appointment_Booking.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 
 namespace FYP_Appointment_Booking.Controllers
 {
@@ -71,6 +79,8 @@ namespace FYP_Appointment_Booking.Controllers
         // GET: AdminAppointments/Create
         public IActionResult Create()
         {
+            ViewBag.TimeBlockHelper = new SelectList(String.Empty);
+
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId");
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
@@ -82,7 +92,7 @@ namespace FYP_Appointment_Booking.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,Time,Location,Details,Confirmed,DoctorId,PatientId,UserId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("Id,TimeBlockHelperDate,Time,Location,Details,Confirmed,DoctorId,PatientId,UserId")] Appointment appointment)
         {
             if (ModelState.IsValid)
             {
@@ -90,6 +100,12 @@ namespace FYP_Appointment_Booking.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+           
+
+            // if (Input.PatientId != null && _context.Appointments.Any(a => a.Date == Input.Date))
+            // {
+
+            // }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
@@ -145,7 +161,10 @@ namespace FYP_Appointment_Booking.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
+                    return RedirectToAction(nameof(Index));
+
+               
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
