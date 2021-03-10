@@ -17,6 +17,10 @@ namespace FYP_Appointment_Booking.Models
 
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
+
+        public TimeSpan Time { get; set; }
+
+
         public string Location { get; set; }
         public string Details { get; set; }
         public bool Confirmed { get; set; }
