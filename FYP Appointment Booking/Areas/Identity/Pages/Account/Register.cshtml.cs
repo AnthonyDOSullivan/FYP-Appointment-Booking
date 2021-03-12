@@ -72,7 +72,7 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             public string Name { get; set; }
-            
+
             public int? DoctorId { get; set; }
             public Doctor? Doctor { get; set; }
 
@@ -97,14 +97,11 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                //Error Message if both doctor ID and Patient ID are blank 
-                if (Input.PatientId == null && Input.DoctorId == null)
+                if (Input.PatientId != null && Input.DoctorId != null)
                 {
                     return RedirectToPage("Register", new { validationMsg = "No patient and doctor" });
                 }
-                //If the patient ID is not already registered, one will be created and the user will be notified. 
-                if (Input.PatientId != null && !_context.Patients.Any(p => p.Id == Input.PatientId))
-                   
+                if (!_context.Patients.Any(p => p.Id == Input.PatientId))
                 {
                     Patient patient = new Patient
                     {
@@ -117,35 +114,12 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
                     string valmsg = "The patient id " + Input.PatientId + " does not exist in our database. We created a new patient Id for you: " + patient.Id + ", please use this in the registration";
                     return RedirectToPage("Register", new { validationMsg = valmsg });
                 }
-                //Check if ID is already in use 
-                if (Input.PatientId != null && _context.Users.Any(u => u.PatientId == Input.PatientId))
+                if (_context.Users.Any(u => u.PatientId == Input.PatientId))
                 {
-                    string valmsg = "This patient id " + Input.PatientId + " is unavailable";
+                    string valmsg = "The patient id " + Input.PatientId + " is already linked to a user profile";
                     return RedirectToPage("Register", new { validationMsg = valmsg });
                 }
-                //Fix for doctors 
-                //If the doctor ID is not already registered, one will be created and the user will be notified. 
-                if (  !_context.Doctors.Any(d => d.DoctorId == Input.DoctorId))
-                //Input.PatientId != null &&
-                {
-                    Doctor doctor = new Doctor
-                    {
-                        Name = "Name required",
-                       // DoctorId = 1,
-
-                    };
-                    _context.Add(doctor);
-                    await _context.SaveChangesAsync();
-                    string valmsg = "The Doctor id " + Input.DoctorId + " does not exist in our database. We created a new Doctor Id for you: " + doctor.DoctorId + ", please use this in the registration";
-                    return RedirectToPage("Register", new { validationMsg = valmsg });
-                }
-                //Check if ID is already in use 
-                if (_context.Users.Any(u => u.DoctorId == Input.DoctorId))
-                {
-                    string valmsg = "The Doctor id " + Input.DoctorId + " is already linked to a user profile";
-                    return RedirectToPage("Register", new { validationMsg = valmsg });
-                }
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PatientId = Input.PatientId, Name = Input.Name, DoctorId=Input.DoctorId };
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PatientId = Input.PatientId, Name = Input.Name, DoctorId = Input.DoctorId };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -176,9 +150,9 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
-                
-               }
-            
+
+                }
+
             }
             else
             {
