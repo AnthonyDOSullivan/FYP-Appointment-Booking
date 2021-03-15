@@ -14,7 +14,7 @@ using FYP_Appointment_Booking.Areas.Identity.Pages.Account;
 
 namespace FYP_Appointment_Booking.Controllers
 {
-    //[Authorize(Policy = "readpolicy")]
+    [Authorize]
     public class AppointmentsController : Controller
     {
         private readonly ApplicationDbContext _context;

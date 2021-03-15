@@ -97,7 +97,8 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                if (Input.PatientId != null && Input.DoctorId != null)
+                if (Input.Name == "Patient")
+                    if (Input.PatientId != null && Input.DoctorId != null)
                 {
                     return RedirectToPage("Register", new { validationMsg = "No patient and doctor" });
                 }
@@ -119,6 +120,7 @@ namespace FYP_Appointment_Booking.Areas.Identity.Pages.Account
                     string valmsg = "The patient id " + Input.PatientId + " is already linked to a user profile";
                     return RedirectToPage("Register", new { validationMsg = valmsg });
                 }
+                
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PatientId = Input.PatientId, Name = Input.Name, DoctorId = Input.DoctorId };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
