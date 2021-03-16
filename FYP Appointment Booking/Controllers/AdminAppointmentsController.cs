@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -94,18 +95,20 @@ namespace FYP_Appointment_Booking.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TimeBlockHelperDate,Time,Location,Details,Confirmed,DoctorId,PatientId,UserId")] Appointment appointment)
         {
-            if (ModelState.IsValid)
+            if (_context.Appointments.Any(a => a.Date == appointment.Date) && _context.Appointments.Any(a => a.Time == appointment.Time) && _context.Appointments.Any(a => a.DoctorId == appointment.DoctorId))
             {
-                _context.Add(appointment);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Content("This date & time is in use");
             }
-           
+                if (ModelState.IsValid)
+                {
+                    _context.Add(appointment);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
 
-            // if (Input.PatientId != null && _context.Appointments.Any(a => a.Date == Input.Date))
-            // {
 
-            // }
+                
+            
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
@@ -141,6 +144,10 @@ namespace FYP_Appointment_Booking.Controllers
             if (id != appointment.Id)
             {
                 return NotFound();
+            }
+            if (_context.Appointments.Any(a => a.Date == appointment.Date) && _context.Appointments.Any(a => a.Time == appointment.Time) && _context.Appointments.Any(a => a.DoctorId == appointment.DoctorId))
+            {
+                return Content("This date & time is in use");
             }
 
             if (ModelState.IsValid)
