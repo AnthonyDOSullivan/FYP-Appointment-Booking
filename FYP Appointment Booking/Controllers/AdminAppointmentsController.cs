@@ -95,20 +95,20 @@ namespace FYP_Appointment_Booking.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TimeBlockHelperDate,Time,Location,Details,Confirmed,DoctorId,PatientId,UserId")] Appointment appointment)
         {
-            if (_context.Appointments.Any(a => a.Date == appointment.Date) && _context.Appointments.Any(a => a.Time == appointment.Time) && _context.Appointments.Any(a => a.DoctorId == appointment.DoctorId))
+            if (_context.Appointments.Any(a => a.Date == appointment.Date && a.Time == appointment.Time && a.DoctorId == appointment.DoctorId))
             {
-                return Content("This date & time is in use");
+                return Content("Appointment Unavailable");
             }
-                if (ModelState.IsValid)
-                {
-                    _context.Add(appointment);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
+            if (ModelState.IsValid)
+            {
+                _context.Add(appointment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
 
 
-                
-            
+
+
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
@@ -145,9 +145,9 @@ namespace FYP_Appointment_Booking.Controllers
             {
                 return NotFound();
             }
-            if (_context.Appointments.Any(a => a.Date == appointment.Date) && _context.Appointments.Any(a => a.Time == appointment.Time) && _context.Appointments.Any(a => a.DoctorId == appointment.DoctorId))
+            if (_context.Appointments.Any(a => a.Date == appointment.Date && a.Time == appointment.Time && a.DoctorId == appointment.DoctorId))
             {
-                return Content("This date & time is in use");
+                return Content("Appointment Unavailable");
             }
 
             if (ModelState.IsValid)
@@ -168,10 +168,10 @@ namespace FYP_Appointment_Booking.Controllers
                         throw;
                     }
                 }
-                
-                    return RedirectToAction(nameof(Index));
 
-               
+                return RedirectToAction(nameof(Index));
+
+
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
