@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,14 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FYP_Appointment_Booking.Data;
 using FYP_Appointment_Booking.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 
 namespace FYP_Appointment_Booking.Controllers
 {
@@ -29,13 +20,12 @@ namespace FYP_Appointment_Booking.Controllers
         }
 
         // GET: AdminAppointments
-        /* public async Task<IActionResult> Index()
-         {
-             var applicationDbContext = _context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
-             return View(await applicationDbContext.ToListAsync());
-         }
-        */
-        //https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/search?view=aspnetcore-5.0
+       /* public async Task<IActionResult> Index()
+        {
+            var applicationDbContext = _context.Appointments.Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
+            return View(await applicationDbContext.ToListAsync());
+        }*/
+
         public async Task<IActionResult> Index(string searchString)
         {
 
@@ -54,8 +44,6 @@ namespace FYP_Appointment_Booking.Controllers
             return View(await appointments.Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User).ToListAsync());
 
         }
-
-
         // GET: AdminAppointments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -80,8 +68,6 @@ namespace FYP_Appointment_Booking.Controllers
         // GET: AdminAppointments/Create
         public IActionResult Create()
         {
-            ViewBag.TimeBlockHelper = new SelectList(String.Empty);
-
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId");
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
@@ -93,7 +79,7 @@ namespace FYP_Appointment_Booking.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TimeBlockHelperDate,Time,Location,Details,Confirmed,DoctorId,PatientId,UserId")] Appointment appointment)
+        public async Task<IActionResult> Create([Bind("Id,Date,Time,Location,Details,Confirmed,DoctorId,PatientId,UserId")] Appointment appointment)
         {
             if (_context.Appointments.Any(a => a.Date == appointment.Date && a.Time == appointment.Time && a.DoctorId == appointment.DoctorId))
             {
@@ -106,9 +92,7 @@ namespace FYP_Appointment_Booking.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-
-
-
+            
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", appointment.UserId);
@@ -168,10 +152,7 @@ namespace FYP_Appointment_Booking.Controllers
                         throw;
                     }
                 }
-
                 return RedirectToAction(nameof(Index));
-
-
             }
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "DoctorId", appointment.DoctorId);
             ViewData["PatientId"] = new SelectList(_context.Patients, "Id", "Id", appointment.PatientId);
