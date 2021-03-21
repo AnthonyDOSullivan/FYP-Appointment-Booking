@@ -3,26 +3,34 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>Doctor</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Speciality)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Speciality)
-        </dd>
-    </dl>
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Doctor Details</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Doctors" asp-action="Index">Doctors</a></li>
+                <li class="breadcrumb-item active">Details</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /Page Header -->
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Speciality)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Speciality)
+    </dd>
+</dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.DoctorId">Edit</a> |

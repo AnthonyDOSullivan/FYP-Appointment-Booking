@@ -4,10 +4,20 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Doctor</h4>
-<hr />
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Add Doctor Details</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Doctors" asp-action="Index">Doctors</a></li>
+                <li class="breadcrumb-item active">Create</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /Page Header -->
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
