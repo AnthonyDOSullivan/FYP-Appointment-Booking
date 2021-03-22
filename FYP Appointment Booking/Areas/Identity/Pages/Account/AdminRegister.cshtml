@@ -1,5 +1,5 @@
 ﻿@page
-@model RegisterModel
+@model AdminRegisterModel
 @{
     ViewData["Title"] = "Register";
     var roles = (List<IdentityRole>)ViewData["roles"];
@@ -30,26 +30,13 @@
             </div>
             <div id="Role" class="form-group">
                 <label asp-for="Input.Name"></label>
-                <select  asp-for="Input.Name" class="form-control" asp-items='new SelectList(roles,"Id","Name","3eed87c6-c65e-4771-9490-bf2782f2ff48")' onfocus="this.setAttribute('data-value', this.value);" 
+                <select  asp-for="Input.Name" class="form-control" asp-items='new SelectList(roles,"Id","Name","acacef9d-6a78-47b1-9614-eb7eb6348292")' onfocus="this.setAttribute('data-value', this.value);" 
 onchange="this.value = this.getAttribute('data-value');">
                 </select>
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
                
             
-                <div  id="PatId" class="form-group">
-                    <label asp-for="Input.PatientId"></label>
-                    <input id="PatId" asp-for="Input.PatientId" class="form-control" />
-                    <span asp-validation-for="Input.PatientId" class="text-danger"></span>
-
-                </div>
-            
-                    <div id="DocId" class="form-group">
-                        <label asp-for="Input.DoctorId"></label>
-                        <input id="PatId" asp-for="Input.DoctorId" class="form-control" />
-                        <span asp-validation-for="Input.DoctorId" class="text-danger"></span>
-
-                    </div>
             
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
