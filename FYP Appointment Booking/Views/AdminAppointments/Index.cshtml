@@ -5,76 +5,85 @@
 }
 
 <h1>Index</h1>
-<form asp-controller="AdminAppointments" asp-action="Index">
-    <div class="form-group search-location">
-        <input type="text" name="SearchString" placeholder="Search Location">
-        <span class="form-text">Filter Based on location</span>
-    </div>
-    <button type="submit" class="btn btn-primary search-btn" value="Filter"><i class="fas fa-search"></i> <span>Search</span></button>
+<div class="search-box">
+    <form asp-controller="AdminAppointments" asp-action="Index">
+        <div class="form-group search-location">
+            <input type="text" name="SearchString" placeholder="Search Location" class="form-control">
+            <span class="form-text">Filter Based on location</span>
+        </div>
+        <button type="submit" class="btn btn-primary search-btn" value="Filter"><i class="fas fa-search"></i> <span>Search</span></button>
 
-</form>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Time)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Details)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Confirmed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Doctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Patient)
-            </th>
-            
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Details)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Confirmed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Doctor.DoctorId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patient.Id)
-            </td>
-            
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    </form>
+ </div>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Time)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Details)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Confirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Doctor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Patient)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Confirmed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Doctor.DoctorId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Patient.Id)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm bg-warning-light">
+                            <i class="far fa-edit"></i>Edit
+                        </a> |
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm bg-info-light">
+                            <i class="far fa-eye"></i>Details
+                        </a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm bg-danger-light">
+                            <i class="fas fa-times"></i>Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

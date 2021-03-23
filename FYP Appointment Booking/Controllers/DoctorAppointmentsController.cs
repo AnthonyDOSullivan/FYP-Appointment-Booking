@@ -40,6 +40,7 @@ namespace FYP_Appointment_Booking.Controllers
               
                 appointments = appointments.Where(a => a.Location.Contains(searchString)).Where(a => a.DoctorId == Usr.DoctorId).Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
             }
+        
             appointments = appointments.OrderBy(a => a.Date);
 
 

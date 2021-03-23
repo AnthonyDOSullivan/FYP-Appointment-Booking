@@ -193,7 +193,11 @@
         <!-- /Header -->
 
         @RenderBody()
-
+        <style>
+            footer-title{
+                color:white;
+            }
+        </style>
         <!-- Footer -->
         <footer class="footer">
 
@@ -204,27 +208,27 @@
                         <div class="col-lg-3 col-md-6">
 
                             <!-- Footer Widget -->
-                            <div class="footer-widget footer-about">
+                            <div class="footer-widget footer-menu">
                                 <div class="footer-logo">
-                                    <img src="~/assets/img/footer-logo.png" alt="logo">
-                                </div>
+                                    <h2 class="footer-title" color="White"> <a asp-area="" asp-controller="Home" asp-action="Index"> FYP Appointment Application</a></h2>
+</div>
                                 <div class="footer-about-content">
                                     <div class="social-icon">
                                         <ul>
                                             <li>
-                                                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                                                <a href="Facebook.com" target="_blank"><i class="fab fa-facebook-f"></i> </a>
                                             </li>
                                             <li>
-                                                <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
+                                                <a href="Twitter.com" target="_blank"><i class="fab fa-twitter"></i> </a>
                                             </li>
                                             <li>
-                                                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                                <a href="LinkedIn.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                                             </li>
                                             <li>
-                                                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                                                <a href="Instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
                                             </li>
                                             <li>
-                                                <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
+                                                <a href="Dribble.com" target="_blank"><i class="fab fa-dribbble"></i> </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -238,13 +242,31 @@
 
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Patients</h2>
+                                <h2 class="footer-title">Patients</h2>
                                 <ul>
-                                    <li><a href="search.html"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-                                    <li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                    <li><a href="register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                    <li><a href="booking.html"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                    <li><a href="patient-dashboard.html"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li><a asp-area="" asp-controller="Patients" asp-action="Index"><i class="fas fa-angle-double-right"></i> All Patients</a></li>
+                                        <li><a asp-area="" asp-controller="Patients" asp-action="Create"><i class="fas fa-angle-double-right"></i> Create a Patient</a></li>
+                                        <li><a asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-angle-double-right"></i> Register a patient account</a></li>
+                                        <li><a asp-area="" asp-controller="AdminAppointments" asp-action="Create"><i class="fas fa-angle-double-right"></i> Book an Appointment</a></li>
+                                        <li><a asp-area="" asp-controller="AdminAppointments" asp-action="Index"><i class="fas fa-angle-double-right"></i> View all Appointments</a></li>
+                                    }
+                                    @if (User.IsInRole("Doctor"))
+                                    {
+                                        <li><a asp-area="" asp-controller="DoctorAppointments" asp-action="Index"><i class="fas fa-angle-double-right"></i> View all Appointments</a></li>
+
+                                    }
+                                    @if (User.IsInRole("Patient"))
+                                    {
+                                        <li><a asp-area="" asp-controller="Appointments" asp-action="Index"><i class="fas fa-angle-double-right"></i> View all Appointments</a></li>
+
+                                    }
+                                    @if (User.IsInRole("Admin") || (User.IsInRole("Doctor")))
+                                    {
+                                        <li><a asp-area="" asp-controller="Patients" asp-action="Index"><i class="fas fa-angle-double-right"></i> All Patients</a></li>
+                                    }
+
                                 </ul>
                             </div>
                             <!-- /Footer Widget -->
@@ -255,13 +277,27 @@
 
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Doctors</h2>
+                                <h2 class="footer-title">Doctors</h2>
                                 <ul>
-                                    <li><a href="appointments.html"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
-                                    <li><a href="chat.html"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-                                    <li><a href="login.html"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                    <li><a href="doctor-register.html"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                    <li><a href="doctor-dashboard.html"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li><a asp-area="" asp-controller="Doctors" asp-action="Index"><i class="fas fa-angle-double-right"></i> View All Doctors</a></li>
+                                        <li><a asp-area="" asp-controller="Doctors" asp-action="Create"><i class="fas fa-angle-double-right"></i> Create a Doctor</a></li>
+                                        <li><a asp-area="Identity" asp-page="/Account/DoctorRegister"><i class="fas fa-angle-double-right"></i> Register a Doctor account</a></li>
+                                        <li><a asp-area="" asp-controller="AdminAppointments" asp-action="Create"><i class="fas fa-angle-double-right"></i> Book an Appointment</a></li>
+                                        <li><a asp-area="" asp-controller="AdminAppointments" asp-action="Index"><i class="fas fa-angle-double-right"></i> View all Appointments</a></li>
+                                    }
+                                    @if (User.IsInRole("Doctor"))
+                                    {
+                                        <li><a asp-area="" asp-controller="DoctorAppointments" asp-action="Index"><i class="fas fa-angle-double-right"></i> View all Appointments</a></li>
+
+                                    }
+                               
+                                    @if (User.IsInRole("Admin") || (User.IsInRole("Doctor")))
+                                    {
+                                        <li><a asp-area="" asp-controller="Patients" asp-action="Index"><i class="fas fa-angle-double-right"></i> All Patients</a></li>
+                                    }
+
                                 </ul>
                             </div>
                             <!-- /Footer Widget -->
@@ -271,62 +307,31 @@
                         <div class="col-lg-3 col-md-6">
 
                             <!-- Footer Widget -->
-                            <div class="footer-widget footer-contact">
-                                <h2 class="footer-title">Contact Us</h2>
-                                <div class="footer-contact-info">
-                                    <div class="footer-address">
-                                        <span><i class="fas fa-map-marker-alt"></i></span>
-                                        <p> 3556  Beech Street, San Francisco,<br> California, CA 94108 </p>
-                                    </div>
-                                    <p>
-                                        <i class="fas fa-phone-alt"></i>
-                                        +1 315 369 5943
-                                    </p>
-                                    <p class="mb-0">
-                                        <i class="fas fa-envelope"></i>
-                                        doccure@example.com
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /Footer Widget -->
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">Resources</h2>
+                                    <ul>
 
-                        </div>
+                                        <li><a asp-area="" asp-controller="Feedback" asp-action="Index"><i class="fas fa-angle-double-right"></i>Feedback</a></li>
+                                        <li><a asp-area="" asp-controller="Qr" asp-action="Index"><i class="fas fa-angle-double-right"></i> QR Code</a></li>
+                                        <li><a asp-area="" asp-controller="Qr" asp-action="Roles"><i class="fas fa-angle-double-right"></i> Roles</a></li>
+                                        
+
+
+                                    </ul>
+                                </div>
+                            }
+                                <!-- /Footer Widget -->
+
+                            </div>
 
                     </div>
                 </div>
             </div>
             <!-- /Footer Top -->
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <div class="container-fluid">
-
-                    <!-- Copyright -->
-                    <div class="copyright">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <div class="copyright-text">
-                                    <p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
-
-                                <!-- Copyright Menu -->
-                                <div class="copyright-menu">
-                                    <ul class="policy-menu">
-                                        <li><a href="term-condition.html">Terms and Conditions</a></li>
-                                        <li><a href="privacy-policy.html">Policy</a></li>
-                                    </ul>
-                                </div>
-                                <!-- /Copyright Menu -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Copyright -->
-
-                </div>
-            </div>
-            <!-- /Footer Bottom -->
+            
+            
 
         </footer>
         <!-- /Footer -->
