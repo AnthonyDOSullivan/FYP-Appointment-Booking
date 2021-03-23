@@ -37,7 +37,11 @@ namespace FYP_Appointment_Booking.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 appointments = appointments.Where(a => a.Location.Contains(searchString)).Include(a => a.Doctor).Include(a => a.Patient).Include(a => a.User);
+
             }
+
+            appointments = appointments.OrderBy(a => a.Date);
+
 
 
 

@@ -43,6 +43,8 @@ namespace FYP_Appointment_Booking.Controllers
 
                 appointments = appointments.Where(a => a.Location.Contains(searchString));
             }
+            appointments = appointments.OrderBy(a => a.Date);
+
             return View(await appointments.ToListAsync());
 
 
