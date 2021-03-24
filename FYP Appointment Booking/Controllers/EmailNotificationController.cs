@@ -68,8 +68,8 @@ namespace FYP_Appointment_Booking.Controllers
                 if (ModelState.IsValid)
                 {
                     // Initialization.  
-                    string emailMsg = "Dear " + model.ToEmail + ", <br /><br />This is a test <b style='color: red'> Reminder </b><br />  <a href = 'https://localhost:44350/Appointments'> Confirm </a><br /> " + "<a href = 'https://localhost:44350/Appointments'>Reschedule</a> <br />" + "<br />Kind Regards, <br />CUH Appointments";
-                    string emailSubject = EmailInfo.EMAIL_SUBJECT_DEFAULT + "Appointment";
+                    string emailMsg = "Dear " + model.ToEmail + ", <br /><br />This is a test <b style='color: red'> Reminder </b> for your upcoming healthcare appointment. <br />  <a href = 'https://localhost:44350/Appointments'> Confirm </a><br /> " + "<a href = 'https://localhost:44350/Appointments'>Reschedule</a> <br />" + "<br />Kind Regards, <br />CUH Appointments";
+                    string emailSubject = EmailInfo.EMAIL_SUBJECT_DEFAULT + " Appointment Notification";
 
                     // Sending Email.  
                     await this.SendEmailAsync(model.ToEmail, emailMsg, emailSubject);

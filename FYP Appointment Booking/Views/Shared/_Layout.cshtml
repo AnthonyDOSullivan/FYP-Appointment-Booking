@@ -38,13 +38,13 @@
         <header class="header">
             <nav class="navbar navbar-expand-lg header-nav">
                 <div class="navbar-header">
-                    
+
                     <a asp-area="" asp-controller="Home" asp-action="Index">
                         <i class="fa fa-home"></i>
                     </a>
                 </div>
                 <div class="main-menu-wrapper">
-                    
+
 
                     <div class="menu-header">
 
@@ -194,8 +194,13 @@
 
         @RenderBody()
         <style>
-            footer-title{
-                color:white;
+            .footer-title {
+                color: white;
+            }
+
+            
+
+            .body {
             }
         </style>
         <!-- Footer -->
@@ -211,24 +216,24 @@
                             <div class="footer-widget footer-menu">
                                 <div class="footer-logo">
                                     <h2 class="footer-title" color="White"> <a asp-area="" asp-controller="Home" asp-action="Index"> FYP Appointment Application</a></h2>
-</div>
+                                </div>
                                 <div class="footer-about-content">
                                     <div class="social-icon">
                                         <ul>
                                             <li>
-                                                <a href="Facebook.com" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                                                <a href="Https://Facebook.com" target="_blank"><i class="fab fa-facebook-f"></i> </a>
                                             </li>
                                             <li>
-                                                <a href="Twitter.com" target="_blank"><i class="fab fa-twitter"></i> </a>
+                                                <a href="Https://Twitter.com" target="_blank"><i class="fab fa-twitter"></i> </a>
                                             </li>
                                             <li>
-                                                <a href="LinkedIn.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                                <a href="Https://LinkedIn.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                                             </li>
                                             <li>
-                                                <a href="Instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                                                <a href="Https://Instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
                                             </li>
                                             <li>
-                                                <a href="Dribble.com" target="_blank"><i class="fab fa-dribbble"></i> </a>
+                                                <a href="Https://Dribble.com" target="_blank"><i class="fab fa-dribbble"></i> </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -292,7 +297,7 @@
                                         <li><a asp-area="" asp-controller="DoctorAppointments" asp-action="Index"><i class="fas fa-angle-double-right"></i> View all Appointments</a></li>
 
                                     }
-                               
+
                                     @if (User.IsInRole("Admin") || (User.IsInRole("Doctor")))
                                     {
                                         <li><a asp-area="" asp-controller="Patients" asp-action="Index"><i class="fas fa-angle-double-right"></i> All Patients</a></li>
@@ -316,26 +321,44 @@
                                         <li><a asp-area="" asp-controller="Feedback" asp-action="Index"><i class="fas fa-angle-double-right"></i>Feedback</a></li>
                                         <li><a asp-area="" asp-controller="Qr" asp-action="Index"><i class="fas fa-angle-double-right"></i> QR Code</a></li>
                                         <li><a asp-area="" asp-controller="Qr" asp-action="Roles"><i class="fas fa-angle-double-right"></i> Roles</a></li>
-                                        
+
 
 
                                     </ul>
                                 </div>
                             }
-                                <!-- /Footer Widget -->
+                            <!-- /Footer Widget -->
 
-                            </div>
+                        </div>
 
                     </div>
                 </div>
             </div>
             <!-- /Footer Top -->
-            
-            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="container-fluid">
+
+                    <!-- Copyright -->
+                    <div class="copyright">
+                        
+                        </div>
+                    </div>
+                    <!-- /Copyright -->
+
+                </div>
+            </div>
+            <!-- /Footer Bottom -->
 
         </footer>
         <!-- /Footer -->
 
+    </div>
+
+
+
+    </footer>
+    <!-- /Footer -->
     </div>
     <!-- /Main Wrapper -->
     <!-- jQuery -->
@@ -350,7 +373,7 @@
 
     <!-- Custom JS -->
     <script src="~/assets/js/script.js"></script>
-            @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 
 </body>
 

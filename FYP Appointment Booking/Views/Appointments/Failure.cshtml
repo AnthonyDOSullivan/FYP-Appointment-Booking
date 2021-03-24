@@ -1,0 +1,39 @@
+﻿@using FYP_Appointment_Booking.Models
+
+@model FYP_Appointment_Booking.Models.Appointment
+
+@{
+    ViewData["Title"] = "Appointment Failure";
+}
+
+<!-- Page Content -->
+<div class="content success-page-cont">
+    <div class="container-fluid">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+
+                <!-- Success Card -->
+                <div class="card success-card">
+                    <div class="card-body">
+                        <div class="success-cont">
+                            <i class="fas fa-exclamation"></i>
+                            <h3>Apologies, this appointment slot is taken.</h3>
+                            <p>Please try another time or date. </p>
+                            <br/>
+                            <p>Please contact us at 117410434@umail.ucc.ie if you require futher assistance</p>
+                            <!-- <p asp-controller="EmailNotification" asp-action="Index" data-ajax="true" data-ajax-method="POST">  Appointment booked with <strong>Dr. Darren Elder</strong><br> on <strong>12 Nov 2019 5:00PM to 6:00PM</strong></p>-->
+                            <a asp-area="" asp-controller="Appointments " asp-action="Index">
+                                Return to My Appointments
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Success Card -->
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /Page Content -->

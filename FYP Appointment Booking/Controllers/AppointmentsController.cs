@@ -144,9 +144,9 @@ namespace FYP_Appointment_Booking.Controllers
             {
                 return NotFound();
             }
-            if (_context.Appointments.Any(a => a.Date == appointment.Date && a.Time == appointment.Time && a.DoctorId == appointment.DoctorId))
+            if (_context.Appointments.Any(a => a.Date == appointment.Date && a.Time == appointment.Time && a.DoctorId == appointment.DoctorId && appointment.Confirmed == false))
             {
-                return Content("Appointment Unavailable");
+                return View("Failure");
             }
                 if (ModelState.IsValid)
             {

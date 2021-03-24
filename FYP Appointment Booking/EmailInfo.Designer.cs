@@ -61,7 +61,7 @@ namespace FYP_Appointment_Booking {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Appointment Notification.
+        ///   Looks up a localized string similar to System Notification:.
         /// </summary>
         public static string EMAIL_SUBJECT_DEFAULT {
             get {

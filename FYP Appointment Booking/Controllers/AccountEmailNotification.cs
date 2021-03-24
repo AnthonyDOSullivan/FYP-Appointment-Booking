@@ -69,7 +69,7 @@ namespace FYP_Appointment_Booking.Controllers
                 {
                     // Initialization.  
                     string emailMsg = "Dear " + model.ToEmail + ", <br /><br />This is a test <b style='color: red'> Account Notification </b><br />  Your account has been set up by our team, by default your password is: Test12345*<br /> " + "<a href = 'https://localhost:44398/Appointments'>Please login to change it </a> <br />" + "<br />Kind Regards, <br />CUH Appointments";
-                    string emailSubject = EmailInfo.EMAIL_SUBJECT_DEFAULT + "Appointment Booking Account";
+                    string emailSubject = EmailInfo.EMAIL_SUBJECT_DEFAULT + " Account Notification";
 
                     // Sending Email.  
                     await this.SendEmailAsync(model.ToEmail, emailMsg, emailSubject);

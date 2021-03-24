@@ -2006,6 +2006,8 @@ html.menu-opened body {
 
 .footer {
     background-color: #15558d;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
 }
 .footer .footer-top {
 	padding: 40px 0;
